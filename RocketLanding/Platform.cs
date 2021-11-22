@@ -38,7 +38,7 @@ namespace RocketLanding
                 return Response.OutOfPlatform.GetDisplayName();
             }
 
-            bool clashPreviousCheckIn = CheckPreviousCheckIns(queryPoint);
+            bool clashPreviousCheckIn = CheckPreviousCheckIns(queryPoint,rocketId);
             if(clashPreviousCheckIn)
             {
                 return Response.Clash.GetDisplayName();
@@ -49,11 +49,16 @@ namespace RocketLanding
             return Response.OK.GetDisplayName();
         }
 
-        private bool CheckPreviousCheckIns(Point queryPoint)
+        private bool CheckPreviousCheckIns(Point queryPoint,int rocketId)
         {           
             var checkedLocations = CheckedLocations.GetCheckedLocations();
             foreach (var checkedLocation in checkedLocations)
             {
+                if(checkedLocation.Value == rocketId)
+                {
+                    continue;
+                }
+                
                 bool clashPreviousCheckIn = Geometry.CheckWithinSquare(
                     Geometry.ConstructSquare(checkedLocation.Value),queryPoint);
 
