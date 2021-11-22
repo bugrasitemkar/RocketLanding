@@ -54,7 +54,7 @@ namespace RocketLanding
             var checkedLocations = CheckedLocations.GetCheckedLocations();
             foreach (var checkedLocation in checkedLocations)
             {
-                if(checkedLocation.value == rocketId)
+                if(checkedLocation.Value == rocketId)
                 {
                     continue;
                 }
